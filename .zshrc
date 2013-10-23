@@ -101,6 +101,10 @@ fi
 # autoenv (https://github.com/kennethreitz/autoenv)
 if [[ -e /usr/local/bin/activate.sh ]] ; then
     source /usr/local/bin/activate.sh
+else
+    if [[ -e /usr/local/opt/autoenv/bin/activate.sh ]] ; then
+        source /usr/local/opt/autoenv/bin/activate.sh
+    fi
 fi
 
 function use_venv() {
