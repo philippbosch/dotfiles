@@ -102,8 +102,8 @@ fi
 if [[ -e /usr/local/bin/activate.sh ]] ; then
     source /usr/local/bin/activate.sh
 else
-    if [[ -e /usr/local/opt/autoenv/bin/activate.sh ]] ; then
-        source /usr/local/opt/autoenv/bin/activate.sh
+    if [[ -e /usr/local/opt/autoenv/activate.sh ]] ; then
+        source /usr/local/opt/autoenv/activate.sh
     fi
 fi
 
