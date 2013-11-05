@@ -16,5 +16,6 @@ Usage
     git pull origin master
     git submodule init
     git submodule update
+    ln -s $HOME/pure/pure.zsh /usr/local/share/zsh/site-functions/prompt_pure_setup
 
 Logout. Login. Finished.
