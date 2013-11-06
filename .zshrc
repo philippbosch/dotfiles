@@ -91,7 +91,7 @@ fi
 export PYTHONSTARTUP=$HOME/.python/startup.py
 
 # virtualenv
-# export VIRTUAL_ENV_DISABLE_PROMPT=1
+export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # Put customizations into .zshrc.local. They will be included here if the file exists.
 if [[ -e .zshrc.local ]] ; then
@@ -114,6 +114,7 @@ function use_venv() {
         fi
     fi
 }
+alias ve=use_venv
 
 # (must come after oh-my-zsh because it overwrites the cd() defined there)
 function cd() {
