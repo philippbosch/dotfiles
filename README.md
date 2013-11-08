@@ -5,8 +5,14 @@ This is a set of basic files I keep in my home dir on all the servers
 I work with. The technique for managing them is the one described by
 Ryan Tomayko [here](https://github.com/rtomayko/dotfiles#readme).
 
-Usage
------
+Prerequisites
+-------------
+
+    apt-get install zsh git
+
+
+Installation
+------------
 
     cd $HOME
     chsh -s /bin/zsh
