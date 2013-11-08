@@ -8,7 +8,8 @@ Ryan Tomayko [here](https://github.com/rtomayko/dotfiles#readme).
 Prerequisites
 -------------
 
-    apt-get install zsh git
+    apt-get install -y zsh git python-pip
+    pip install autoenv
 
 
 Installation
