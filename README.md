@@ -8,7 +8,15 @@ Ryan Tomayko [here](https://github.com/rtomayko/dotfiles#readme).
 Prerequisites
 -------------
 
+### Linux
+
     apt-get install -y zsh git python-pip
+    pip install autoenv
+
+
+### OSX
+
+    brew install git python
     pip install autoenv
 
 
