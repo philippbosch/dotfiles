@@ -29,7 +29,7 @@ Installation
     chsh -s /bin/zsh
     git init
     echo "*" >> .git/info/exclude
-    git remote add origin git://github.com/philippbosch/dotfiles.git
+    git remote add origin https://github.com/philippbosch/dotfiles.git
     git pull origin master
     git submodule init
     git submodule update
@@ -44,7 +44,7 @@ Installation
     chsh -s /usr/local/bin/zsh
     git init
     echo "*" >> .git/info/exclude
-    git remote add origin git://github.com/philippbosch/dotfiles.git
+    git remote add origin https://github.com/philippbosch/dotfiles.git
     git pull origin master
     git submodule init
     git submodule update
