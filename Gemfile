@@ -1,0 +1,12 @@
+source 'https://rubygems.org/'
+
+gem 'bundler'
+gem 'compass'
+gem 'foreman'
+gem 'json'
+gem 'rack'
+gem 'rack-coffee'
+gem 'rake'
+gem 'serve'
+gem 'susy'
+gem 'thin'
