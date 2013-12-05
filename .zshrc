@@ -108,11 +108,20 @@ else
 fi
 
 function use_venv() {
-    if [[ -z "$VIRTUAL_ENV" ]] ; then
-        if [[ -e ./venv/bin/activate ]] ; then
-            source venv/bin/activate
+    # if [[ -z "$VIRTUAL_ENV" ]] ; then
+        if [[ -f ./.virtualenvname ]] ; then
+            VENV_DIR="$HOME/Dev/VirtualEnvs/`cat .virtualenvname`"
+        elif [[ -e ./venv/bin/activate ]] ; then
+            VENV_DIR="./venv"
+        elif [[ -e $HOME/Dev/VirtualEnvs/`basename \`pwd\``/bin/activate ]] ; then
+            VENV_DIR="$HOME/Dev/VirtualEnvs/`basename \`pwd\``"
+        else
+            echo "Unable to find a virtualenv directory." 1>&2
+            return 99
         fi
-    fi
+        echo "Activating virtualenv in $VENV_DIR"
+        source $VENV_DIR/bin/activate
+    # fi
 }
 alias ve=use_venv
 
