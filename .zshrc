@@ -50,7 +50,7 @@ export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
 # Customize to your needs...
-export PATH=/usr/local/sbin:/usr/local/bin:$PATH:/usr/sbin:/usr/bin:/sbin:/bin:$HOME/bin
+export PATH="/usr/local/sbin:/usr/local/bin:$HOME/bin:$PATH"
 
 # Pure prompt
 autoload -U promptinit && promptinit

@@ -2,6 +2,8 @@ source 'https://rubygems.org/'
 
 gem 'bundler'
 gem 'compass'
+gem 'consular'
+gem 'consular-iterm'
 gem 'foreman'
 gem 'json'
 gem 'rack'

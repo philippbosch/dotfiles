@@ -1,1 +1,1 @@
-gem: --no-ri --no-rdoc -V -n/usr/local/bin
+gem: --no-ri --no-rdoc -V
