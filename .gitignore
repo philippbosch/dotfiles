@@ -96,5 +96,9 @@ doc/
 ### virtualenvs
 env
 venv
+.virtualenvname
+
+
+.env
 
 history
