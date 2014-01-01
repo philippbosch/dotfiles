@@ -87,9 +87,6 @@ if [ ! "$SSH_TTY" ] && [[ "$OSTYPE" =~ "darwin" ]] ; then
     alias imageoptim="open -a /Applications/ImageOptim.app"
 fi
 
-# Python
-export PYTHONSTARTUP=$HOME/.python/startup.py
-
 # virtualenv
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
