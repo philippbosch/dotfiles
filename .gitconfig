@@ -26,13 +26,13 @@
 	added = diff --cached --name-only
 	rv = remote -v
 
-[branch "master"]
-	remote = origin
-	merge = refs/heads/master
+#[branch "master"]
+#	remote = origin
+#	merge = refs/heads/master
 
-[branch "develop"]
-	remote = origin
-	merge = refs/heads/develop
+#[branch "develop"]
+#	remote = origin
+#	merge = refs/heads/develop
 
 [push]
 	# Push current branch even if you've never pushed it before
@@ -40,3 +40,5 @@
 
 [include]
 	path = .gitconfig.local
+[help]
+	autocorrect = 1
