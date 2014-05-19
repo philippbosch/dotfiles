@@ -1,16 +1,6 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-# ZSH_THEME="robbyrussell"
-
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
@@ -18,7 +8,7 @@ ZSH=$HOME/.oh-my-zsh
 # DISABLE_AUTO_UPDATE="true"
 
 # Uncomment to change how often before auto-updates occur? (in days)
-# export UPDATE_ZSH_DAYS=13
+export UPDATE_ZSH_DAYS=1
 
 # Uncomment following line if you want to disable colors in ls
 # DISABLE_LS_COLORS="true"
@@ -37,10 +27,16 @@ COMPLETION_WAITING_DOTS="true"
 # much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
+# Customize to your needs...
+export PATH="/usr/local/sbin:/usr/local/bin:$HOME/bin:$PATH"
+
+# tmux plugin
+ZSH_TMUX_ITERM2=true
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git django gem git-flow github heroku node npm pip redis-cli ruby terminitor bower brew cloudapp coffee docker fabric osx pod supervisor grunt)
+plugins=(git django gem git-flow github heroku node npm pip redis-cli ruby bower brew cloudapp coffee docker osx pod supervisor grunt tmux)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -48,9 +44,6 @@ source $ZSH/oh-my-zsh.sh
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
-
-# Customize to your needs...
-export PATH="/usr/local/sbin:/usr/local/bin:$HOME/bin:$PATH"
 
 # Pure prompt
 autoload -U promptinit && promptinit
@@ -60,7 +53,9 @@ prompt pure
 export PIP_LOG_FILE="/tmp/pip-log.txt"
 
 # Editor
-if [[ ! -z "`command -v subl`" ]] ; then
+if [[ ! -z "`command -v atom`" ]] ; then
+    export EDITOR="`which atom` -w"
+elif [[ ! -z "`command -v subl`" ]] ; then
     export EDITOR="`which subl` -w"
 elif [[ ! -z "`command -v choc_wait`" ]] ; then
     export EDITOR="`which choc_wait`"
@@ -83,7 +78,7 @@ fi
 if [ ! "$SSH_TTY" ] && [[ "$OSTYPE" =~ "darwin" ]] ; then
     alias ss="open /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app"
     alias flush="dscacheutil -flushcache"
-    alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
+    alias httpdump="sudo tcpdump -i en0 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
     alias imageoptim="open -a /Applications/ImageOptim.app"
 fi
 
@@ -104,24 +99,6 @@ else
     fi
 fi
 
-function use_venv() {
-    # if [[ -z "$VIRTUAL_ENV" ]] ; then
-        if [[ -f ./.virtualenvname ]] ; then
-            VENV_DIR="$HOME/Dev/VirtualEnvs/`cat .virtualenvname`"
-        elif [[ -e ./venv/bin/activate ]] ; then
-            VENV_DIR="./venv"
-        elif [[ -e $HOME/Dev/VirtualEnvs/`basename \`pwd\``/bin/activate ]] ; then
-            VENV_DIR="$HOME/Dev/VirtualEnvs/`basename \`pwd\``"
-        else
-            echo "Unable to find a virtualenv directory." 1>&2
-            return 99
-        fi
-        echo "Activating virtualenv in $VENV_DIR"
-        source $VENV_DIR/bin/activate
-    # fi
-}
-alias ve=use_venv
-
 # (must come after oh-my-zsh because it overwrites the cd() defined there)
 function cd() {
     emulate -LR zsh
@@ -134,3 +111,6 @@ function cd() {
         return $?
     fi
 }
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"

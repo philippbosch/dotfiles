@@ -38,9 +38,8 @@
 	# Push current branch even if you've never pushed it before
 	default = current
 
-[include]
-	path = .gitconfig.local
 [help]
 	autocorrect = 1
-[credential]
-	helper = osxkeychain
+
+[include]
+	path = .gitconfig.local
