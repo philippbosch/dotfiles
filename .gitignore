@@ -22,7 +22,7 @@ tmtags
 # Packages
 *.egg
 *.egg-info
-dist
+#dist
 build
 eggs
 parts
@@ -102,3 +102,4 @@ venv
 .env
 
 history
+wheelhouse
