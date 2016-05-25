@@ -23,7 +23,7 @@ tmtags
 *.egg
 *.egg-info
 #dist
-build
+#build
 eggs
 parts
 develop-eggs
@@ -45,7 +45,7 @@ local_settings.py
 
 ### https://github.com/github/gitignore/blob/master/Objective-C.gitignore
 # Xcode
-build/*
+#build/*
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -101,5 +101,5 @@ venv
 
 .env
 
-history
 wheelhouse
+.ansible-vault-password

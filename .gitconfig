@@ -22,6 +22,7 @@
 	di = diff
 	dc = diff --cached
 	amend = commit --amend
+	recommit = commit --amend --no-edit
 	aa = add --all
 	ff = merge --ff-only
 	pull = pull --rebase
@@ -76,3 +77,12 @@
 	smudge = git-media-smudge %f
 [credential]
 	helper = osxkeychain
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[pack]
+	windowMemory = 100m
+	SizeLimit = 100m
+	threads = 1
+	window = 0
