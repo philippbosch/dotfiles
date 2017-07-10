@@ -1,0 +1,27 @@
+alias l="ls -AlG"
+alias _editor=atom
+alias joe=_editor
+alias serve="python3 -m http.server"
+alias reload="exec $SHELL -l"
+alias dcpm="docker-compose run web python manage.py"
+alias sshr='ssh -A -l ubuntu -i "~/Dropbox (A Color Bright)/Tech/RBMA Radio/rbma-radio-servers.pem"'
+
+function use_venv () {
+  if [[ -f './.virtualenvname' ]] ; then
+    VENV_DIR="$HOME/Dev/VirtualEnvs/`cat .virtualenvname`"
+  elif [[ -e ./venv/bin/activate ]] ; then
+    VENV_DIR="./venv"
+  elif [[ -e $HOME/Dev/VirtualEnvs/`basename \`pwd\``/bin/activate ]] ; then
+    VENV_DIR="$HOME/Dev/VirtualEnvs/`basename \`pwd\``"
+  else
+    echo "Unable to find a virtualenv directory." 1>&2
+    return 99
+  fi
+  echo "Activating virtualenv in $VENV_DIR"
+  source $VENV_DIR/bin/activate
+}
+alias ve=use_venv
+
+function certinfo() {
+  echo | openssl s_client -showcerts -servername $1 -connect $1:443 2>/dev/null | openssl x509 -inform pem -noout -text
+}
