@@ -1,10 +1,11 @@
 #!/bin/bash
 
-#set -e
+set -e
 
 DOTFILESDIR=$(dirname $0)
-DIRS=$(find $DOTFILESDIR -mindepth 1 -path $DOTFILESDIR/.git -prune -o -type d -printf '%P\n')
-FILES=$(find $DOTFILESDIR -mindepth 1 -path $DOTFILESDIR/.git -prune -o -type f -not -name $(basename $0) -printf '%P\n')
+FIND=$(command -v gfind || 'find')
+DIRS=$($FIND $DOTFILESDIR -mindepth 1 -path $DOTFILESDIR/.git -prune -o -type d -printf '%P\n')
+FILES=$($FIND $DOTFILESDIR -mindepth 1 -path $DOTFILESDIR/.git -prune -o -type f -not -name $(basename $0) -printf '%P\n')
 
 for DIR in $DIRS ; do
   echo "› Creating directory $DIR"
