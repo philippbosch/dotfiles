@@ -1,6 +1,5 @@
 alias l="ls -AlG"
 alias _editor=atom
-alias joe=_editor
 alias serve="python3 -m http.server"
 alias reload="exec $SHELL -l"
 alias dcpm="docker-compose run web python manage.py"
