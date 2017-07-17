@@ -2,8 +2,8 @@
 
 set -e
 
-DOTFILESDIR=$(dirname $0)
-FIND=$(command -v gfind || 'find')
+DOTFILESDIR=$(readlink -f $(dirname $0))
+FIND=$(command -v gfind || echo 'find')
 DIRS=$($FIND $DOTFILESDIR -mindepth 1 -path $DOTFILESDIR/.git -prune -o -type d -printf '%P\n')
 FILES=$($FIND $DOTFILESDIR -mindepth 1 -path $DOTFILESDIR/.git -prune -o -type f -not -name $(basename $0) -printf '%P\n')
 
