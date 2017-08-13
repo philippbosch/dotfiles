@@ -29,7 +29,7 @@ call plug#end()
 colorscheme tender
 let g:airline_theme = 'tender'
 
-let g:ale_linters = {'javascript': ['eslint']}
+" let g:ale_linters = {'javascript': ['eslint']}
 let g:ale_sign_column_always = 1
 " let g:ale_sign_error = '•'
 " let g:ale_sign_warning = '•'
@@ -46,4 +46,11 @@ map <D-7> 7gt
 map <D-8> 8gt
 map <D-9> 9gt
 map <D-0> :tablast<CR>
+
+let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<2-LeftMouse>'],
+    \ 'AcceptSelection("t")': ['<cr>'],
+    \ }
+
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|venv|bower_components|dist)|(\.(swp|ico|git))$'
 

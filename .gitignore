@@ -4,3 +4,5 @@ tmp
 venv
 .DS_Store
 *.egg-info
+*.swp
+
