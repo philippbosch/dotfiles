@@ -1,0 +1,1 @@
+/home/pb/.zprezto/runcoms/zshenv
