@@ -1,9 +1,11 @@
-alias l="ls -AlG"
+alias l="ls -lG"
 alias _editor=atom
 alias serve="python3 -m http.server"
 alias reload="exec $SHELL -l"
 alias dcpm="docker-compose run web python manage.py"
 alias sshr='ssh -A -l ubuntu -i "~/Dropbox (A Color Bright)/Tech/RBMA Radio/rbma-radio-servers.pem"'
+alias ta='tmux attach -t'
+alias tl='tmux ls'
 
 function use_venv () {
   if [[ -f './.virtualenvname' ]] ; then
