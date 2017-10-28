@@ -5,7 +5,7 @@ set -e
 DOTFILESDIR=$(readlink -f $(dirname $0))
 FIND=$(command -v gfind || echo 'find')
 DIRS=$($FIND $DOTFILESDIR -mindepth 1 -path $DOTFILESDIR/.git -prune -o -type d -printf '%P\n')
-FILES=$($FIND $DOTFILESDIR -mindepth 1 -path $DOTFILESDIR/.git -prune -o -type f,l -not -name $(basename $0) -printf '%P\n')
+FILES=$($FIND $DOTFILESDIR -mindepth 1 -path $DOTFILESDIR/.git -prune -o -type f,l -not -name $(basename $0) -not -name README.md -printf '%P\n')
 
 for DIR in $DIRS ; do
   echo "› Creating directory $DIR"
