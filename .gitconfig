@@ -37,7 +37,7 @@
 	added = diff --cached --name-only
 	rv = remote -v
 	b = branch
-	ds = diff --stat=160,120
+	ds = diff --staged
 	blast = !git-blast
 
 	# Fancy logging.
