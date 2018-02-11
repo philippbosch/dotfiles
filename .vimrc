@@ -9,6 +9,7 @@ set backspace=indent,eol,start
 set nowrap
 set cursorline
 " set conceallevel=0
+set ignorecase
 
 filetype plugin indent on
 
@@ -25,6 +26,8 @@ Plug 'othree/yajs.vim'
 " Plug 'Yggdroot/indentLine'
 Plug 'jacoborus/tender.vim'
 Plug 'kchmck/vim-coffee-script'
+Plug 'mkitt/tabline.vim'
+Plug 'scrooloose/nerdcommenter'
 
 call plug#end()
 

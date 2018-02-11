@@ -72,21 +72,23 @@
 [help]
 	autocorrect = 1
 
+[url "ssh://git@github.com/"]                                                   
+	insteadOf = https://github.com/
+
 [include]
 	path = .gitconfig.local
+
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
-[credential]
-	helper = osxkeychain
+
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
+
 [pack]
 	windowMemory = 100m
 	SizeLimit = 100m
 	threads = 1
 	window = 0
-[commit]
-	gpgsign = true
