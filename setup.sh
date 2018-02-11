@@ -2,7 +2,8 @@
 
 set -e
 
-DOTFILESDIR=$(readlink -f $(dirname $0))
+READLINK=$(command -v greadlink || command -v readlink)
+DOTFILESDIR=$($READLINK -f $(dirname $0))
 FIND=$(command -v gfind || echo 'find')
 DIRS=$($FIND $DOTFILESDIR -mindepth 1 -path $DOTFILESDIR/.git -prune -o -type d -printf '%P\n')
 FILES=$($FIND $DOTFILESDIR -mindepth 1 -path $DOTFILESDIR/.git -prune -o -type f,l -not -name $(basename $0) -not -name README.md -printf '%P\n')
