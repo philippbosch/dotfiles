@@ -1,6 +1,7 @@
 [user]
 	email = hello@pb.io
 	name = Philipp Bosch
+	signingkey = 30C44A80A8D24676
 
 [core]
 	excludesfile = ~/.gitignore
@@ -87,3 +88,5 @@
 	SizeLimit = 100m
 	threads = 1
 	window = 0
+[commit]
+	gpgsign = true
