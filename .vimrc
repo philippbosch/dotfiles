@@ -33,11 +33,15 @@ call plug#end()
 
 colorscheme tender
 let g:airline_theme = 'tender'
+hi Normal guibg=NONE ctermbg=NONE
+hi Visual term=reverse cterm=reverse guibg=Grey
 
 let g:ale_linters = {'javascript': ['eslint']}
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '•'
 let g:ale_sign_warning = '•'
+let g:ale_python_flake8_executable = 'python3'
+let g:ale_python_flake8_options = '-m flake8'
 hi ALEErrorSign guifg=#f43753 ctermfg=203 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi ALEWarningSign guifg=#ffc24b ctermfg=215 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 
