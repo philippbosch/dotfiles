@@ -12,16 +12,31 @@ fi
 
 
 # Antigen
-source /usr/share/zsh-antigen/antigen.zsh
-antigen bundle lukechilds/zsh-nvm
+if [[ -f /usr/share/zsh-antigen/antigen.zsh ]] ; then
+  source /usr/share/zsh-antigen/antigen.zsh
+  antigen bundle lukechilds/zsh-nvm
+fi
+
+
+# ZSH syntax highlighting
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+
+# ZSH completions
+fpath=(/usr/local/share/zsh-completions $fpath)
 
 
 # AWS autocompletion
-source $(which aws_zsh_completer.sh)
+source /usr/local/share/zsh/site-functions/aws_zsh_completer.sh
 
 
 # Aliases
 source $HOME/.aliases
+
+
+# Editor
+export EDITOR=$(which vim)
+
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`

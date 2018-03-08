@@ -28,6 +28,7 @@ Plug 'jacoborus/tender.vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'mkitt/tabline.vim'
 Plug 'scrooloose/nerdcommenter'
+Plug 'editorconfig/editorconfig-vim'
 
 call plug#end()
 
@@ -61,5 +62,14 @@ let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("t")': ['<cr>'],
     \ }
 
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|venv|bower_components|dist)|(\.(swp|ico|git))$'
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
 
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s --hidden -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif

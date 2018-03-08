@@ -6,7 +6,8 @@ READLINK=$(command -v greadlink || command -v readlink)
 DOTFILESDIR=$($READLINK -f $(dirname $0))
 FIND=$(command -v gfind || echo 'find')
 DIRS=$($FIND $DOTFILESDIR -mindepth 1 -path $DOTFILESDIR/.git -prune -o -type d -printf '%P\n')
-FILES=$($FIND $DOTFILESDIR -mindepth 1 -path $DOTFILESDIR/.git -prune -o -type f,l -not -name $(basename $0) -not -name README.md -printf '%P\n')
+FILES=$($FIND $DOTFILESDIR -mindepth 1 -path $DOTFILESDIR/.git -prune -o -type f -not -name $(basename $0) -not -name README.md -printf '%P\n')
+LINKS=$($FIND $DOTFILESDIR -mindepth 1 -path $DOTFILESDIR/.git -prune -o -type l -not -name $(basename $0) -not -name README.md -printf '%P\n')
 
 for DIR in $DIRS ; do
   echo "› Creating directory $DIR"
@@ -17,12 +18,12 @@ for DIR in $DIRS ; do
   fi
 done
 
-for FILE in $FILES ; do
+for FILE in $FILES $LINKS ; do
   echo "› Linking $FILE"
   LINKTARGET=$DOTFILESDIR/$FILE
   if [ -L $FILE ] ; then
     CURRENTLINKTARGET=$(readlink $FILE)
-    if [ $CURRENTLINKTARGET = $LINKTARGET ] ; then
+    if [ "$CURRENTLINKTARGET" = "$LINKTARGET" ] ; then
       echo "  Symlink already set up. Skipping."
     else
       echo "  Symlink exists but points to $CURRENTLINKTARGET instead of $LINKTARGET. Skipping."
