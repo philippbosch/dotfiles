@@ -27,3 +27,5 @@ alias ve=use_venv
 function certinfo() {
   echo | openssl s_client -showcerts -servername $1 -connect $1:443 2>/dev/null | openssl x509 -inform pem -noout -text
 }
+
+alias urlencode='python3 -c "import sys; import urllib.parse; print (urllib.parse.quote(sys.stdin.read()))"'

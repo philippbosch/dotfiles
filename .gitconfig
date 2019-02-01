@@ -83,12 +83,15 @@
 	smudge = git-media-smudge %f
 
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
 	required = true
+	process = git-lfs filter-process
 
 [pack]
 	windowMemory = 100m
 	SizeLimit = 100m
 	threads = 1
 	window = 0
+#[commit]
+#	gpgsign = true
