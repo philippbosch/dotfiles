@@ -9,7 +9,9 @@ Includes files for zsh, vim, git, tmux, …
 
 ```shell
 $ cd $HOME
+$ xcode-select install
 $ git clone https://github.com/philippbosch/dotfiles.git
+$ dotfiles/bootstrap.sh
 $ dotfiles/setup.sh
 ```
 
