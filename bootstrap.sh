@@ -11,7 +11,7 @@ brew cleanup
 
 # Check Homebrew installation so far
 brew doctor
-read -p "Press Enter if the above "
+read -p "Press Enter if the above looks ok, Ctrl-C otherwise."
 
 # Install brews
 brew bundle install
