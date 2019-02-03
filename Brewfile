@@ -68,4 +68,4 @@ mas 'Lungo', id: 1263070803
 mas 'Outbank', id: 1094255754
 mas 'Pixelmator', id: 407963104
 mas 'Spark', id: 1176895641
-mas 'Xcode', id: 497799835
+# mas 'Xcode', id: 497799835
