@@ -1,0 +1,5 @@
+# Aliases
+source $HOME/.aliases
+
+# Editor
+export EDITOR=$(which vim)
