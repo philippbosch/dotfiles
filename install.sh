@@ -15,6 +15,10 @@ then
     mv "$HOME/.zshrc" "$HOME/.zshrc.backup"
 fi
 
+# Install pure prompt
+mkdir -p "$HOME/.zsh"
+git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
+
 # Link all files in home to the home directory
 for file in $(ls home)
 do
