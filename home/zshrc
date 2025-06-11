@@ -4,7 +4,7 @@ ZSH_THEME=""
 DISABLE_AUTO_UPDATE="true"
 
 # Default zsh plugins
-plugins=(git)
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
