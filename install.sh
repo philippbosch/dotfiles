@@ -67,5 +67,5 @@ fi
 
 if [ "$OS" == "linux" ]; then
     sudo apt update
-    # sudo apt install -y …
+    sudo apt install -y neovim
 fi

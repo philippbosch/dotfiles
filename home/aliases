@@ -1,6 +1,5 @@
 alias l="ls -alG --color"
 alias la="l -a"
-alias vim='command -v vim >/dev/null 2>&1 && vim || vim.tiny'
 alias _editor=vim
 alias serve="python -m http.server"
 alias reload="exec $SHELL -l"
