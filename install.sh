@@ -18,6 +18,22 @@ if [ "$OS" == "macos" ]; then
     fi
 fi
 
+# Install some packages
+if [ "$OS" == "linux" ]; then
+    sudo apt update
+    sudo apt install -y zsh
+    sudo apt install -y neovim
+    sudo apt install -y fzf
+    sudo apt install -y npm
+fi
+if [ "$OS" == "macos" ]; then
+    brew update
+    brew install zsh
+    brew install neovim
+    brew install fzf
+    brew install node
+fi
+
 # Add oh-my-zsh as a submodule
 if [ ! -d home/oh-my-zsh ]
 then
@@ -58,7 +74,7 @@ do
     fi
 done
 
-# Install some packages
+# Install some casks
 if [ "$OS" == "macos" ]; then
     brew install --cask iterm2
     brew install --cask google-chrome
@@ -66,9 +82,4 @@ if [ "$OS" == "macos" ]; then
     brew install --cask spotify
     brew install --cask visual-studio-code
     brew install --cask cursor
-fi
-
-if [ "$OS" == "linux" ]; then
-    sudo apt update
-    sudo apt install -y neovim
 fi
