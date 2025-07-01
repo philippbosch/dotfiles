@@ -49,23 +49,12 @@ then
     mv "$HOME/.zshrc" "$HOME/.zshrc.backup"
 fi
 
-# Install pure prompt
 mkdir -p "$HOME/.zsh"
-git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
-
-# Install zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-
-# Install zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-
-# Install diff-so-fancy
-sudo npm install -g diff-so-fancy
 
 # Link all files in home to the home directory
 for file in $(ls home)
 do
-    if [[ -f "$HOME/.$file" ]]
+    if [[ -e "$HOME/.$file" ]]
     then
         echo "🚫 .$file exists. Skipping."
     else
@@ -73,6 +62,27 @@ do
         ln -s "$(pwd)/home/$file" "$HOME/.$file"
     fi
 done
+
+# Install pure prompt
+if [ ! -d "$HOME/.zsh/pure" ]
+then
+    git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
+fi
+
+# Install zsh-syntax-highlighting
+if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]
+then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+fi
+
+# Install zsh-autosuggestions
+if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ]
+then
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+fi
+
+# Install diff-so-fancy
+sudo npm install -g diff-so-fancy
 
 # Install some casks
 if [ "$OS" == "macos" ]; then
