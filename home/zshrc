@@ -13,7 +13,7 @@ source $ZSH/oh-my-zsh.sh
 source $HOME/.aliases
 
 # Editor
-export EDITOR=$(which vim)
+export EDITOR=nvim
 
 # Pure prompt
 fpath+=($HOME/.zsh/pure)

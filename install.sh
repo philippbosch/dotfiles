@@ -83,13 +83,3 @@ fi
 
 # Install diff-so-fancy
 sudo npm install -g diff-so-fancy
-
-# Install some casks
-if [ "$OS" == "macos" ]; then
-    brew install --cask iterm2
-    brew install --cask google-chrome
-    brew install --cask slack
-    brew install --cask spotify
-    brew install --cask visual-studio-code
-    brew install --cask cursor
-fi
