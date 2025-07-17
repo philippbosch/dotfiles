@@ -22,3 +22,19 @@ prompt pure
 
 # FZF
 source <(fzf --zsh)
+
+# direnv
+eval "$(direnv hook zsh)"
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+[ -s "/opt/homebrew/opt/nvm/etc/zsh_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/zsh_completion.d/nvm"
+
+# SSH agent
+if [[ "$OSTYPE" == "darwin"* && -z "$CODESPACES" && -z "$REMOTE_CONTAINERS" ]]; then
+  if ! ssh-add -l >/dev/null 2>&1; then
+    eval "$(ssh-agent -s)"
+    ssh-add --apple-use-keychain ~/.ssh/id_rsa
+  fi
+fi
