@@ -25,6 +25,7 @@ if [ "$OS" == "linux" ]; then
     sudo apt install -y neovim
     sudo apt install -y fzf
     sudo apt install -y npm
+    sudo apt install -y direnv
 fi
 if [ "$OS" == "macos" ]; then
     brew update
@@ -32,6 +33,7 @@ if [ "$OS" == "macos" ]; then
     brew install neovim
     brew install fzf
     brew install node
+    brew install direnv
 fi
 
 # Add oh-my-zsh as a submodule
