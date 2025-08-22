@@ -28,6 +28,20 @@ if [ "$OS" == "linux" ]; then
         npm \
         direnv \
         silversearcher-ag
+
+    # Check fzf version and upgrade if needed
+    REQUIRED_FZF_VERSION="0.48.0"
+    CURRENT_VERSION=$(fzf --version | awk '{print $1}')
+    if [ "$(printf '%s\n' "$REQUIRED_FZF_VERSION" "$CURRENT_VERSION" | sort -V | head -n1)" != "$REQUIRED_FZF_VERSION" ]; then
+        apt remove -y fzf
+        echo "fzf $CURRENT_VERSION is < $REQUIRED_FZF_VERSION, installing newer version..."
+        FZF_VERSION="0.56.3"
+        wget -O /tmp/fzf.tar.gz "https://github.com/junegunn/fzf/releases/download/v${FZF_VERSION}/fzf-${FZF_VERSION}-linux_amd64.tar.gz"
+        sudo tar -xzf /tmp/fzf.tar.gz -C /usr/local/bin
+        rm /tmp/fzf.tar.gz
+    else
+        echo "fzf $CURRENT_VERSION is already >= $REQUIRED_FZF_VERSION"
+    fi
 fi
 if [ "$OS" == "macos" ]; then
     brew update
