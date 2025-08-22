@@ -21,19 +21,23 @@ fi
 # Install some packages
 if [ "$OS" == "linux" ]; then
     sudo apt update
-    sudo apt install -y zsh
-    sudo apt install -y neovim
-    sudo apt install -y fzf
-    sudo apt install -y npm
-    sudo apt install -y direnv
+    sudo apt install -y \
+        zsh \
+        neovim \
+        fzf \
+        npm \
+        direnv \
+        silversearcher-ag
 fi
 if [ "$OS" == "macos" ]; then
     brew update
-    brew install zsh
-    brew install neovim
-    brew install fzf
-    brew install node
-    brew install direnv
+    brew install \
+        zsh \
+        neovim \
+        fzf \
+        node \
+        direnv \
+        the_silver_searcher
 fi
 
 # Add oh-my-zsh as a submodule
