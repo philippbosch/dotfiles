@@ -7,6 +7,7 @@
   excludesfile = ~/.gitignore
   quotepath = false
   pager = diff-so-fancy | less --tabs 4 -RFX
+  checkStat = minimal  # Prevent rebase and status errors in VS Code devcontainers (Docker volume metadata quirks)
 
 [github]
   user = philippbosch
@@ -27,6 +28,7 @@
   amend = commit --amend --no-edit
   recommit = commit --amend --no-edit
   aa = add --all
+  ap = add -p
   ff = merge --ff-only
   pull = pull --rebase
   pullff = pull --ff-only
@@ -41,6 +43,9 @@
   rv = remote -v
   b = branch
   ds = diff --staged
+  rfom = fetch origin main
+  rbom = rebase origin/main
+  rom = !git rfom && git rbom
   blast = !git for-each-ref --sort=-committerdate --color=always --format='%(if)%(HEAD)%(then)* %(color:green)%(refname:short)%(color:reset)%(else)  %(refname:short)%(end)|%(color:blue)%(committerdate:relative)%(color:reset)|%(color:bold black)%(authorname)%(color:reset)|%(contents:subject)' refs/heads/ | column -t -s '|' | fzf --ansi | cut -b3- | awk '{ print $1 }' | xargs git switch
 
   # Fancy logging.
@@ -57,15 +62,6 @@
   ra = !git r --all
   l = "!. ~/.githelpers && pretty_git_log"
   la = !git l --all
-
-
-#[branch "master"]
-#  remote = origin
-#  merge = refs/heads/master
-
-#[branch "develop"]
-#  remote = origin
-#  merge = refs/heads/develop
 
 [push]
   # Push current branch even if you've never pushed it before
@@ -96,10 +92,13 @@
   SizeLimit = 100m
   threads = 1
   window = 0
+
 [init]
   defaultBranch = main
+
 [gpg]
 #[gpg "ssh"]
 #  program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+
 [commit]
   gpgsign = true
