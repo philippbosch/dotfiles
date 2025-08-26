@@ -103,3 +103,6 @@ fi
 
 # Install diff-so-fancy
 sudo npm install -g diff-so-fancy
+
+# Install Claude Code
+sudo npm install -g @anthropic-ai/claude-code
