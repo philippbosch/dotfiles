@@ -1,5 +1,23 @@
 #!/bin/bash
 
+# set -e
+
+# Function to run commands with appropriate privileges
+run_privileged() {
+    if [ "$EUID" -eq 0 ]; then
+        # Already running as root, no sudo needed
+        "$@"
+    elif command -v sudo &> /dev/null; then
+        # Not root but sudo is available
+        sudo "$@"
+    else
+        # Not root and sudo not available
+        echo "Error: This script requires root privileges but sudo is not available."
+        echo "Please run as root or install sudo."
+        exit 1
+    fi
+}
+
 # Detect OS
 if [ "$(uname)" == "Darwin" ]; then
     OS="macos"
@@ -20,8 +38,8 @@ fi
 
 # Install some packages
 if [ "$OS" == "linux" ]; then
-    sudo apt update
-    sudo apt install -y \
+    run_privileged apt update
+    run_privileged apt install -y \
         zsh \
         neovim \
         fzf \
@@ -33,11 +51,11 @@ if [ "$OS" == "linux" ]; then
     REQUIRED_FZF_VERSION="0.48.0"
     CURRENT_VERSION=$(fzf --version | awk '{print $1}')
     if [ "$(printf '%s\n' "$REQUIRED_FZF_VERSION" "$CURRENT_VERSION" | sort -V | head -n1)" != "$REQUIRED_FZF_VERSION" ]; then
-        apt remove -y fzf
+        run_privileged apt remove -y fzf
         echo "fzf $CURRENT_VERSION is < $REQUIRED_FZF_VERSION, installing newer version..."
         FZF_VERSION="0.56.3"
         wget -O /tmp/fzf.tar.gz "https://github.com/junegunn/fzf/releases/download/v${FZF_VERSION}/fzf-${FZF_VERSION}-linux_amd64.tar.gz"
-        sudo tar -xzf /tmp/fzf.tar.gz -C /usr/local/bin
+        run_privileged tar -xzf /tmp/fzf.tar.gz -C /usr/local/bin
         rm /tmp/fzf.tar.gz
     else
         echo "fzf $CURRENT_VERSION is already >= $REQUIRED_FZF_VERSION"
@@ -102,7 +120,7 @@ then
 fi
 
 # Install diff-so-fancy
-sudo npm install -g diff-so-fancy
+run_privileged npm install -g diff-so-fancy
 
 # Install Claude Code
-sudo npm install -g @anthropic-ai/claude-code
+run_privileged npm install -g @anthropic-ai/claude-code

@@ -38,3 +38,7 @@ if [[ "$OSTYPE" == "darwin"* && -z "$CODESPACES" && -z "$REMOTE_CONTAINERS" ]]; 
     ssh-add --apple-use-keychain ~/.ssh/id_rsa
   fi
 fi
+
+# Homebrewed Ruby
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH:/opt/homebrew/lib/ruby/gems/3.4.0/bin"
+
