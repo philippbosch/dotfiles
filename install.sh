@@ -78,7 +78,13 @@ then
     git submodule add https://github.com/ohmyzsh/ohmyzsh.git home/oh-my-zsh
 fi
 
-# Update oh-my-zsh
+# Add kickstart.vim as a submodule
+if [ ! -d home/config/nvim ]
+then
+    git submodule add https://github.com/philippbosch/kickstart.nvim.git home/config/nvim
+fi
+
+# Update submodules
 git submodule update --init --recursive --remote
 
 # Backup existing zshrc
@@ -90,7 +96,7 @@ fi
 mkdir -p "$HOME/.zsh"
 
 # Link all files in home to the home directory
-for file in $(ls home)
+for file in $(ls home | grep -v "^config$")
 do
     if [[ -e "$HOME/.$file" ]]
     then
@@ -98,6 +104,17 @@ do
     else
         echo "🔗 Linking .$file"
         ln -s "$(pwd)/home/$file" "$HOME/.$file"
+    fi
+done
+
+for file in $(ls home/config)
+do
+    if [[ -e "$HOME/.config/$file" ]]
+    then
+        echo "🚫 .$file exists. Skipping."
+    else
+        echo "🔗 Linking .config/$file"
+        ln -s "$(pwd)/home/config/$file" "$HOME/.config/$file"
     fi
 done
 
