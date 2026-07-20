@@ -69,9 +69,6 @@
 [help]
   autocorrect = 1
 
-[url "ssh://git@github.com/"]
-  insteadOf = https://github.com/
-
 [include]
   path = .gitconfig.local
 
@@ -100,3 +97,12 @@
 
 [commit]
   gpgsign = true
+
+[credential "https://github.com"]
+  helper = !/opt/homebrew/bin/gh auth git-credential
+
+[credential "https://gist.github.com"]
+  helper = !/opt/homebrew/bin/gh auth git-credential
+
+[url "ssh://git@github.com/"]
+  insteadof = https://github.com/

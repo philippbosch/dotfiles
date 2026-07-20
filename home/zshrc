@@ -31,16 +31,34 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
 [ -s "/opt/homebrew/opt/nvm/etc/zsh_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/zsh_completion.d/nvm"
 
-# SSH agent
-if [[ "$OSTYPE" == "darwin"* && -z "$CODESPACES" && -z "$REMOTE_CONTAINERS" ]]; then
-  if ! ssh-add -l >/dev/null 2>&1; then
-    eval "$(ssh-agent -s)"
-    ssh-add --apple-use-keychain ~/.ssh/id_rsa
-  fi
-fi
+# # SSH agent
+# if [[ "$OSTYPE" == "darwin"* && -z "$CODESPACES" && -z "$REMOTE_CONTAINERS" ]]; then
+#   if ! ssh-add -l >/dev/null 2>&1; then
+#     eval "$(ssh-agent -s)"
+#     ssh-add --apple-use-keychain ~/.ssh/id_rsa
+#   fi
+# fi
 
 # Homebrewed Ruby
-export PATH="$(brew --prefix ruby)/bin:$(ruby -e 'print Gem.bindir'):$PATH"
+# export PATH="$(brew --prefix ruby)/bin:$(ruby -e 'print Gem.bindir'):$PATH"
+export PATH="/opt/homebrew/opt/ruby/bin:/opt/homebrew/lib/ruby/gems/4.0.0/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/ruby/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/ruby/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/ruby/lib/pkgconfig"
 
 # Homebrewed Python
 export PATH="$PATH:$(brew --prefix python)/libexec/bin"
+
+# mise
+eval "$(mise activate zsh)"
+
+# fnox
+eval "$(fnox activate zsh)"
+export FNOX_AGE_KEY_FILE=~/.ssh/id_ed25519
+
+# OpenJDK
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+
+# Android
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export PATH="$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
