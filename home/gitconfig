@@ -1,7 +1,7 @@
 [user]
   email = hello@pb.io
   name = Philipp Bosch
-  signingkey = 1413FC35212713CD
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHzcdf1qrxXMKGbBDvumAZYnJvGNrmgiqYkCfKuXVYiS
 
 [core]
   excludesfile = ~/.gitignore
@@ -23,17 +23,13 @@
   ci = commit --verbose
   co = checkout
   di = diff
-  dc = diff --cached
   cp = cherry-pick
   amend = commit --amend --no-edit
-  recommit = commit --amend --no-edit
   aa = add --all
   ap = add -p
   ff = merge --ff-only
-  pull = pull --rebase
   pullff = pull --ff-only
   fa = fetch --all
-  pom = push origin master
   hist = "log --pretty=format:\"%h | %ad | %s%d [%an]\" --graph --date=short"
   msg = commit --allow-empty -m
   lol = log --pretty=oneline --abbrev-commit --graph --decorate
@@ -61,20 +57,40 @@
   r = !GIT_NO_PAGER=1 git l -30
   l = "!. ~/.githelpers && pretty_git_log"
 
+[pull]
+  rebase = true
+
 [push]
   # Push current branch even if you've never pushed it before
   default = current
   autoSetupRemote = true
+  followTags = true
+
+[fetch]
+  prune = true
+
+[rebase]
+  autoStash = true
+  updateRefs = true
+
+[rerere]
+  enabled = true
+
+[diff]
+  algorithm = histogram
+  colorMoved = default
+
+[merge]
+  conflictstyle = zdiff3
+
+[branch]
+  sort = -committerdate
 
 [help]
-  autocorrect = 1
+  autocorrect = prompt
 
 [include]
   path = .gitconfig.local
-
-[filter "media"]
-  clean = git-media-clean %f
-  smudge = git-media-smudge %f
 
 [filter "lfs"]
   clean = git-lfs clean -- %f
@@ -82,29 +98,31 @@
   required = true
   process = git-lfs filter-process
 
-[pack]
-  windowMemory = 100m
-  SizeLimit = 100m
-  threads = 1
-  window = 0
-
 [init]
   defaultBranch = main
-
-[gpg]
-#[gpg "ssh"]
-#  program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
 
 [commit]
   gpgsign = true
 
+[tag]
+  gpgsign = true
+
+# Sign with the SSH key held in 1Password (on Linux, override gpg.ssh.program in ~/.gitconfig.local)
+[gpg]
+  format = ssh
+
+[gpg "ssh"]
+  program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+  allowedSignersFile = ~/.ssh/allowed_signers
+
 [credential "https://github.com"]
-  helper = !/opt/homebrew/bin/gh auth git-credential
+  helper = !gh auth git-credential
 
 [credential "https://gist.github.com"]
-  helper = !/opt/homebrew/bin/gh auth git-credential
+  helper = !gh auth git-credential
 
 [url "ssh://git@github.com/"]
   insteadof = https://github.com/
+
 [credential "https://git.heroku.com"]
-	helper = !heroku git:credentials
+  helper = !heroku git:credentials
