@@ -14,8 +14,8 @@
 # break this.
 
 HASH="%C(yellow)%h%Creset"
-RELATIVE_TIME="%Cgreen(%ar)%Creset"
-AUTHOR="%C(bold blue)<%an>%Creset"
+RELATIVE_TIME="%Cgreen%ar%Creset"
+AUTHOR="%C(bold blue)%an%Creset"
 REFS="%C(bold red)%d%Creset"
 SUBJECT="%s"
 
@@ -39,7 +39,7 @@ ANSI_WHITE_BOLD='\033[0;37;1m'
 ANSI_RESET='\033[0m'
 
 # FORMAT="$HASH}$RELATIVE_TIME}$AUTHOR}$REFS $SUBJECT"
-FORMAT="$(printf $ANSI_BLUE)$HASH}$(printf $ANSI_GREEN)$RELATIVE_TIME}$(printf $ANSI_YELLOW)$AUTHOR}$(printf $ANSI_MAGENTA)$REFS $(printf $ANSI_WHITE)$SUBJECT$(printf $ANSI_RESET)"
+FORMAT="$(printf $ANSI_BLUE)$HASH}$(printf $ANSI_YELLOW)$AUTHOR} $(printf $ANSI_GREEN)$RELATIVE_TIME}$(printf $ANSI_MAGENTA)$REFS $(printf $ANSI_WHITE)$SUBJECT$(printf $ANSI_RESET)"
 
 show_git_head() {
     pretty_git_log -1

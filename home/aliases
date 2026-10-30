@@ -1,16 +1,22 @@
-alias l="ls -alG --color"
+alias ls=eza
+alias l="ls --long --classify=auto --no-quotes --hyperlink --no-permissions --no-user --git --git-repos"
 alias la="l -a"
-alias _editor=vim
-alias serve="python -m http.server"
+alias _editor=code
+alias serve="python3 -m http.server"
 alias reload="exec $SHELL -l"
 alias dc=docker-compose
 alias tf=terraform
+alias vim=nvim
 
 function use_venv () {
-  if [[ -e ./venv/bin/activate ]] ; then
+  if [[ -f './.virtualenvname' ]] ; then
+    VENV_DIR="$HOME/Dev/VirtualEnvs/`cat .virtualenvname`"
+  elif [[ -e ./venv/bin/activate ]] ; then
     VENV_DIR="./venv"
   elif [[ -e ./.venv/bin/activate ]] ; then
     VENV_DIR="./.venv"
+  elif [[ -e $HOME/Dev/VirtualEnvs/`basename \`pwd\``/bin/activate ]] ; then
+    VENV_DIR="$HOME/Dev/VirtualEnvs/`basename \`pwd\``"
   else
     echo "Unable to find a virtualenv directory." 1>&2
     return 99
@@ -19,4 +25,29 @@ function use_venv () {
   source $VENV_DIR/bin/activate
 }
 alias ve=use_venv
+
+function certinfo() {
+  echo | openssl s_client -showcerts -servername $1 -connect $1:443 2>/dev/null | openssl x509 -inform pem -noout -text
+}
+
+alias urlencode='python3 -c "import sys; import urllib.parse; print (urllib.parse.quote(sys.stdin.read()))"'
+
+
+alias cat=bat
+
+
+# Git shortcuts
+
+alias gs='git st'
+alias gpush='git push'
+alias gpull='git pull'
+alias gpullr='git pull --rebase'
+alias gd='git diff'
+alias gds='git diff --staged'
+alias ga='git add -p'
+alias gc='git commit'
+alias gco='git co'
+alias gl='git l'
+alias gr='git rebase'
+alias gcp='git cherry-pick'
 
