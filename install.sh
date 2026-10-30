@@ -2,6 +2,9 @@
 
 # set -e
 
+# Always operate relative to the repo, regardless of where the script is run from
+cd "$(dirname "$0")" || exit 1
+
 # Function to run commands with appropriate privileges
 run_privileged() {
     if [ "$EUID" -eq 0 ]; then
@@ -63,32 +66,14 @@ if [ "$OS" == "linux" ]; then
 fi
 if [ "$OS" == "macos" ]; then
     brew update
-    brew install \
-        zsh \
-        neovim \
-        fzf \
-        node \
-        direnv \
-        the_silver_searcher
+    brew bundle --file=Brewfile
 fi
 
-# Add oh-my-zsh as a submodule
-if [ ! -d home/oh-my-zsh ]
-then
-    git submodule add https://github.com/ohmyzsh/ohmyzsh.git home/oh-my-zsh
-fi
-
-# Add kickstart.vim as a submodule
-if [ ! -d home/config/nvim ]
-then
-    git submodule add https://github.com/philippbosch/kickstart.nvim.git home/config/nvim
-fi
-
-# Update submodules
-git submodule update --init --recursive --remote
+# Fetch submodules at the commits pinned in this repo
+git submodule update --init --recursive
 
 # Backup existing zshrc
-if [ -f "$HOME/.zshrc" ]
+if [ -f "$HOME/.zshrc" ] && [ ! -L "$HOME/.zshrc" ]
 then
     mv "$HOME/.zshrc" "$HOME/.zshrc.backup"
 fi
@@ -136,8 +121,17 @@ then
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 fi
 
-# Install diff-so-fancy
-run_privileged npm install -g diff-so-fancy
+# Install language runtimes and global CLIs from ~/.config/mise/config.toml
+if command -v mise &> /dev/null; then
+    mise install
+fi
 
-# Install Claude Code
-run_privileged npm install -g @anthropic-ai/claude-code
+# Install diff-so-fancy (comes from the Brewfile on macOS)
+if [ "$OS" == "linux" ]; then
+    run_privileged npm install -g diff-so-fancy
+fi
+
+# Install Claude Code (native installer, auto-updates)
+if ! command -v claude &> /dev/null; then
+    curl -fsSL https://claude.ai/install.sh | bash
+fi
