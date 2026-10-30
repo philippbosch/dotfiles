@@ -48,7 +48,8 @@ if [ "$OS" == "linux" ]; then
         fzf \
         npm \
         direnv \
-        silversearcher-ag
+        stow \
+        ripgrep
 
     # Check fzf version and upgrade if needed
     REQUIRED_FZF_VERSION="0.48.0"
@@ -72,36 +73,19 @@ fi
 # Fetch submodules at the commits pinned in this repo
 git submodule update --init --recursive
 
-# Backup existing zshrc
-if [ -f "$HOME/.zshrc" ] && [ ! -L "$HOME/.zshrc" ]
-then
-    mv "$HOME/.zshrc" "$HOME/.zshrc.backup"
-fi
-
 mkdir -p "$HOME/.zsh"
 
-# Link all files in home to the home directory
-for file in $(ls home | grep -v "^config$")
-do
-    if [[ -e "$HOME/.$file" ]]
-    then
-        echo "🚫 .$file exists. Skipping."
-    else
-        echo "🔗 Linking .$file"
-        ln -s "$(pwd)/home/$file" "$HOME/.$file"
-    fi
-done
+# Create these as real directories so stow links the files inside them
+# instead of turning the whole directory into a symlink into this repo
+mkdir -p "$HOME/.config" "$HOME/.ssh" && chmod 700 "$HOME/.ssh"
 
-for file in $(ls home/config)
-do
-    if [[ -e "$HOME/.config/$file" ]]
-    then
-        echo "🚫 .$file exists. Skipping."
-    else
-        echo "🔗 Linking .config/$file"
-        ln -s "$(pwd)/home/config/$file" "$HOME/.config/$file"
-    fi
-done
+# Link everything in home/ into ~. Stow never overwrites existing files:
+# on conflicts, either remove them or run `stow --adopt -t ~ home` to pull
+# them into the repo, then review with `git diff`.
+if ! stow -t "$HOME" --restow home; then
+    echo "🚫 stow found conflicting files in ~ (see above). Resolve them and re-run."
+    exit 1
+fi
 
 # Install pure prompt
 if [ ! -d "$HOME/.zsh/pure" ]

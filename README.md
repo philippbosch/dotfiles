@@ -13,24 +13,27 @@ git clone git@github.com:philippbosch/dotfiles.git ~/dotfiles
 
 1. Installs Homebrew and the packages in [`Brewfile`](Brewfile) (macOS) or a minimal apt set (Linux)
 2. Checks out the submodules at their pinned commits
-3. Symlinks every file in `home/` to `~/.<name>` and every entry in `home/config/` to `~/.config/<name>`. Existing files are **skipped, not replaced**, so check its output for 🚫 lines
+3. Symlinks everything in `home/` into `~` with [GNU Stow](https://www.gnu.org/software/stow/). Stow never overwrites existing files; on conflicts it stops and lists them
 4. Installs the pure prompt, zsh plugins, and Claude Code
 
 ## Layout
 
-| Repo path         | Linked to         | Notes                                           |
-| ----------------- | ----------------- | ----------------------------------------------- |
-| `home/zshrc`      | `~/.zshrc`        | oh-my-zsh + pure prompt, mise, direnv, fnox     |
-| `home/aliases`    | `~/.aliases`      | Sourced from zshrc                              |
-| `home/gitconfig`  | `~/.gitconfig`    | Aliases, SSH commit signing via 1Password, `gh` credential helper |
-| `home/githelpers` | `~/.githelpers`   | Used by the `git l` / `git hp` aliases          |
-| `home/gitignore`  | `~/.gitignore`    | Global excludes                                 |
-| `home/ssh/config` | `~/.ssh/config`   | 1Password SSH agent, GitHub over port 443       |
-| `home/ssh/allowed_signers` | `~/.ssh/allowed_signers` | Lets `git log --show-signature` verify my commits |
-| `home/config/nvim`| `~/.config/nvim`  | Submodule: fork of kickstart.nvim               |
-| `home/oh-my-zsh`  | `~/.oh-my-zsh`    | Submodule                                       |
-| `home/config/mise`| `~/.config/mise`  | node, python, ruby, java + global npm CLIs      |
-| `home/default-gems` | `~/.default-gems` | Gems mise installs with every new Ruby        |
+`home/` mirrors `~`: `home/.zshrc` is linked as `~/.zshrc`, `home/.config/mise/config.toml` as `~/.config/mise/config.toml`, and so on. To add a file, move it into the same place under `home/` and run `stow -d ~/dotfiles -t ~ --restow home`.
+
+| Path in `home/`             | Notes                                                     |
+| --------------------------- | --------------------------------------------------------- |
+| `.zshrc`                    | oh-my-zsh + pure prompt, mise, direnv, fnox               |
+| `.aliases`                  | Sourced from `.zshrc`                                     |
+| `.gitconfig`                | Aliases, SSH commit signing via 1Password, `gh` credentials |
+| `.githelpers`               | Used by the `git l` / `git hp` aliases                    |
+| `.gitignore`                | Global excludes                                           |
+| `.ssh/config`               | 1Password SSH agent, GitHub over port 443                 |
+| `.ssh/allowed_signers`      | Lets `git log --show-signature` verify my commits         |
+| `.config/mise/config.toml`  | node, python, ruby, java + global npm CLIs                |
+| `.default-gems`             | Gems mise installs with every new Ruby                    |
+| `.config/nvim`              | Submodule: fork of kickstart.nvim                         |
+| `.oh-my-zsh`                | Submodule                                                 |
+| `.stow-local-ignore`        | Files stow should not link                                |
 
 ## Machine-specific config (not checked in)
 

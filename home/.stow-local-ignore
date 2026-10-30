@@ -1,0 +1,3 @@
+# Replaces stow's default ignore list (which would skip .gitignore)
+\.stow-local-ignore
+\.DS_Store
