@@ -1,8 +1,7 @@
 [settings]
 experimental = true
-# Honor .nvmrc / .node-version / .ruby-version files in projects.
-# Not python: several old projects pin patch versions mise can't verify (no attestations).
-idiomatic_version_file_enable_tools = ["node", "ruby"]
+# Honor .nvmrc / .node-version / .python-version / .ruby-version files in projects
+idiomatic_version_file_enable_tools = ["node", "python", "ruby"]
 
 [tools]
 node = "24"
