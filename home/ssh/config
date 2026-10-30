@@ -13,3 +13,10 @@ Host github.com
   Hostname ssh.github.com
   Port 443
   User git
+
+Host 148.251.0.188 render.campfirefm.app
+  User root
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+  AddKeysToAgent yes
+  UseKeychain yes
