@@ -1,0 +1,17 @@
+[settings]
+experimental = true
+# Honor .nvmrc / .node-version / .ruby-version files in projects.
+# Not python: several old projects pin patch versions mise can't verify (no attestations).
+idiomatic_version_file_enable_tools = ["node", "ruby"]
+
+[tools]
+node = "24"
+python = "3.14"
+ruby = "4.0"      # gems from ~/.default-gems are installed with each new version
+java = "zulu-17"  # also sets JAVA_HOME
+
+# Global npm CLIs (independent of the active node version)
+"npm:eas-cli" = "latest"
+"npm:vercel" = "latest"
+"npm:yarn" = "latest"
+"npm:ask-cli" = "latest"
