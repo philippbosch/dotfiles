@@ -1,22 +1,16 @@
 IgnoreUnknown UseKeychain
 
-Host *
-  UseKeychain yes
-  AddKeysToAgent yes
-  IdentityFile ~/.ssh/id_rsa
-
-
-Host *
-  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+# Machine-specific / private hosts (not checked in)
+Include ~/.ssh/config.local
 
 Host github.com
   Hostname ssh.github.com
   Port 443
   User git
 
-Host 148.251.0.188 render.campfirefm.app
-  User root
-  IdentityFile ~/.ssh/id_ed25519
-  IdentitiesOnly yes
-  AddKeysToAgent yes
+# Defaults: must come last, ssh uses the first value it finds for each option
+Host *
+  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
   UseKeychain yes
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/id_rsa
