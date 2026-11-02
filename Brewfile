@@ -66,5 +66,13 @@ cask "logi-options+"
 
 # ─── Mac App Store ─────────────────────────────────────────
 mas "Xcode", id: 497799835
+mas "Keynote", id: 361285480
+mas "Numbers", id: 361304891
+mas "Pages", id: 361309726
+mas "Pixelmator Pro", id: 1289583905
+mas "1Blocker", id: 1365531024
+mas "Dato", id: 1470584107
+mas "Lungo", id: 1263070803
+mas "The Unarchiver", id: 425424353
 mas "Outbank", id: 1094255754
 mas "WhatsApp", id: 310633997
