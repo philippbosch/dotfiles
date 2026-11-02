@@ -4,6 +4,7 @@
 
 tap "getsentry/tools"
 tap "heroku/brew"
+tap "uberblick-ai/tap"
 
 # ─── Shell ─────────────────────────────────────────────────
 brew "zsh"
@@ -37,6 +38,8 @@ brew "watchman"      # React Native file watching
 brew "postgresql@15"
 brew "getsentry/tools/sentry-cli"
 brew "heroku/brew/heroku"
+brew "uberblick-ai/tap/uberblick"
+brew "uberblick-ai/tap/ub-agents"
 
 # ─── Dev apps ──────────────────────────────────────────────
 cask "claude"            # Claude Desktop
