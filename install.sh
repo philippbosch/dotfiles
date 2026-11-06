@@ -84,6 +84,24 @@ if [ "$OS" == "macos" ]; then
     done
 
     brew bundle --file=Brewfile
+
+    # Point the developer directory at full Xcode (the Homebrew installer
+    # selects the Command Line Tools, which breaks xcodebuild and Expo builds)
+    XCODE_DEV=/Applications/Xcode.app/Contents/Developer
+    if [ -d "$XCODE_DEV" ]; then
+        if [ "$(xcode-select -p 2>/dev/null)" != "$XCODE_DEV" ]; then
+            run_privileged xcode-select -s "$XCODE_DEV"
+        fi
+        # Accepting the license is a no-op if it's already accepted
+        run_privileged xcodebuild -license accept
+        xcodebuild -runFirstLaunch
+        if ! xcrun simctl list runtimes 2>/dev/null | grep -q '^iOS'; then
+            echo "Downloading the iOS platform and simulator (several GB)..."
+            xcodebuild -downloadPlatform iOS
+        fi
+    else
+        echo "⚠️  Xcode not found in /Applications; re-run install.sh once it's installed."
+    fi
 fi
 
 # Fetch submodules at the commits pinned in this repo
