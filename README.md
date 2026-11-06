@@ -16,6 +16,19 @@ git clone git@github.com:philippbosch/dotfiles.git ~/dotfiles
 3. Symlinks everything in `home/` into `~` with [GNU Stow](https://www.gnu.org/software/stow/). Stow never overwrites existing files; on conflicts it stops and lists them
 4. Installs the pure prompt, zsh plugins, and Claude Code
 
+## Manual installs
+
+Not in the Brewfile because they need a pinned version:
+
+- **ownCloud desktop client 6.0.3**: 7.x dropped support for ownCloud 10 servers, and the `owncloud` cask always installs the latest version.
+
+  ```sh
+  curl -LO https://download.owncloud.com/desktop/ownCloud/stable/6.0.3.18040/mac/ownCloud-6.0.3.18040-arm64.pkg
+  sudo installer -pkg ownCloud-6.0.3.18040-arm64.pkg -target /
+  ```
+
+  Then disable automatic update checks in ownCloud's settings.
+
 ## Layout
 
 `home/` mirrors `~`: `home/.zshrc` is linked as `~/.zshrc`, `home/.config/mise/config.toml` as `~/.config/mise/config.toml`, and so on. To add a file, move it into the same place under `home/` and run `stow -d ~/dotfiles -t ~ --restow home`.

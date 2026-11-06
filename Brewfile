@@ -52,6 +52,7 @@ cask "expo-orbit"
 cask "figma"
 cask "1password"         # also SSH agent + commit signing
 cask "1password-cli"
+cask "tailscale-app"     # mesh VPN (cask formerly named "tailscale")
 
 # ─── Browsers ──────────────────────────────────────────────
 cask "zen"
@@ -66,6 +67,10 @@ cask "telegram"
 cask "toggl-track"
 cask "spotify"
 cask "logi-options+"
+
+# ─── Manual install: ownCloud 6.0.3 ────────────────────────
+# Must stay < 7: client 7.x dropped support for ownCloud 10 servers, and the
+# `owncloud` cask always installs the latest 7.x. See README → Manual installs.
 
 # ─── Mac App Store ─────────────────────────────────────────
 mas "Xcode", id: 497799835
