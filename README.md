@@ -4,10 +4,23 @@ Shell, git, SSH and editor config for macOS (Linux partially supported).
 
 ## Install
 
+On a fresh Mac, sign in to the App Store first (needed for the `mas` entries), then:
+
 ```sh
-git clone git@github.com:philippbosch/dotfiles.git ~/dotfiles
+# Homebrew + gh, then clone over HTTPS (no SSH key yet)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+eval "$(/opt/homebrew/bin/brew shellenv)"
+brew install gh && gh auth login   # GitHub.com → HTTPS → browser
+gh repo clone philippbosch/dotfiles ~/dotfiles
 ~/dotfiles/install.sh
 ```
+
+The script is safe to re-run. Afterwards:
+
+1. Open a new terminal (or `exec zsh`) to load the new shell config
+2. Open 1Password, sign in, and enable Settings → Developer → **Use the SSH agent** and **Integrate with 1Password CLI**
+3. Check `ssh -T git@github.com`, then switch the repo to SSH: `git -C ~/dotfiles remote set-url origin git@github.com:philippbosch/dotfiles.git`
+4. Do the [manual installs](#manual-installs)
 
 `install.sh`:
 

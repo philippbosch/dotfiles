@@ -38,7 +38,7 @@ brew "watchman"      # React Native file watching
 brew "postgresql@15"
 brew "getsentry/tools/sentry-cli"
 brew "heroku/brew/heroku"
-brew "vercel"        # Vercel CLI (via brew: npm releases lack provenance)
+cask "vercel"        # Vercel CLI (cask; npm releases lack provenance)
 brew "uberblick-ai/tap/uberblick"
 brew "uberblick-ai/tap/ub-agents"
 

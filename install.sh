@@ -31,11 +31,22 @@ else
     exit 1
 fi
 
+# Make tools installed by this script usable within the same run,
+# regardless of the shell it was started from
+export PATH="$HOME/.local/bin:$PATH"
+load_brew() {
+    if [ -x /opt/homebrew/bin/brew ]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    fi
+}
+
 # Install Homebrew
 if [ "$OS" == "macos" ]; then
+    load_brew
     if ! command -v brew &> /dev/null; then
         echo "Installing Homebrew..."
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        load_brew
     fi
 fi
 
@@ -92,22 +103,28 @@ if ! stow -t "$HOME" --restow home; then
     exit 1
 fi
 
+# Clone public repos without ~/.gitconfig: it rewrites GitHub URLs to SSH,
+# which needs the 1Password SSH agent and isn't set up yet on a fresh machine
+clone_public() {
+    GIT_CONFIG_GLOBAL=/dev/null git clone "$@"
+}
+
 # Install pure prompt
 if [ ! -d "$HOME/.zsh/pure" ]
 then
-    git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
+    clone_public https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
 fi
 
 # Install zsh-syntax-highlighting
 if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]
 then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+    clone_public https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 fi
 
 # Install zsh-autosuggestions
 if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ]
 then
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    clone_public https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 fi
 
 # Install language runtimes and global CLIs from ~/.config/mise/config.toml
@@ -121,6 +138,9 @@ if [ "$OS" == "linux" ]; then
 fi
 
 # Install Claude Code (native installer, auto-updates)
-if ! command -v claude &> /dev/null; then
+if [ ! -x "$HOME/.local/bin/claude" ]; then
     curl -fsSL https://claude.ai/install.sh | bash
 fi
+
+echo
+echo "✅ Done. Open a new terminal (or run: exec zsh) to load the new shell config."
