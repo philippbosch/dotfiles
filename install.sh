@@ -67,6 +67,11 @@ if [ "$OS" == "linux" ]; then
 fi
 if [ "$OS" == "macos" ]; then
     brew update
+
+    for tap in getsentry/tools heroku/brew uberblick-ai/tap; do
+        brew tap "$tap" && brew trust "$tap"
+    done
+
     brew bundle --file=Brewfile
 fi
 

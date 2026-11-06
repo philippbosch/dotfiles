@@ -38,6 +38,7 @@ brew "watchman"      # React Native file watching
 brew "postgresql@15"
 brew "getsentry/tools/sentry-cli"
 brew "heroku/brew/heroku"
+brew "vercel"        # Vercel CLI (via brew: npm releases lack provenance)
 brew "uberblick-ai/tap/uberblick"
 brew "uberblick-ai/tap/ub-agents"
 
@@ -57,14 +58,12 @@ cask "tailscale-app"     # mesh VPN (cask formerly named "tailscale")
 # ─── Browsers ──────────────────────────────────────────────
 cask "zen"
 cask "google-chrome"
-cask "velja"             # per-link browser routing
 
 # ─── Productivity & communication ──────────────────────────
 cask "raycast"
 cask "slack"
 cask "signal"
 cask "telegram"
-cask "toggl-track"
 cask "spotify"
 cask "logi-options+"
 
@@ -84,3 +83,5 @@ mas "Lungo", id: 1263070803
 mas "The Unarchiver", id: 425424353
 mas "Outbank", id: 1094255754
 mas "WhatsApp", id: 310633997
+mas "Velja", id: 1607635845
+mas "Toggl Track", id: 1291898086

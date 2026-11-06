@@ -11,6 +11,5 @@ java = "zulu-17"  # also sets JAVA_HOME
 
 # Global npm CLIs (independent of the active node version)
 "npm:eas-cli" = "latest"
-"npm:vercel" = "latest"
 "npm:yarn" = "latest"
 "npm:ask-cli" = "latest"
