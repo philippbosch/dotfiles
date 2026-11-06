@@ -1,0 +1,14 @@
+font-family = PragmataPro Mono Liga
+font-size = 16
+background = #191919
+split-divider-color = #333333
+theme = Smyck
+window-padding-x = 8
+window-padding-y = 8
+# window-decoration = none
+maximize = true
+# window-show-tab-bar = never
+macos-titlebar-style = tabs
+# macos-icon = glass
+
+auto-update-channel = tip
